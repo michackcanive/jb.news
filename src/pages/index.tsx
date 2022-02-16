@@ -12,9 +12,9 @@ export default function Home() {
            <main className={styles.contentContainer }>
                <section className={styles.hero}>
                 <span>👋Olá, Bem-Vindo</span>
-                <h1>News about the <span>React</span> world.</h1>
+                <h1>Notícias sobre o <span>React</span>no mundo.</h1>
                 <p>
-                    Get access to all the publications <br/>
+                Tenha acesso a todas as publicações <br/>
                     <span className={styles.span_preso}>for $2.30 month</span>
                 </p>
                 <SubscribeButton/>
