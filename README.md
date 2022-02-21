@@ -2,7 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 Um Front 😍
-![repo-settings-image](https://github.com/michackcanive/jb_tranferencias_reactjs/blob/master/public/next.png
+
+https://github.com/michackcanive/jb.news/blob/main/public/images/next.png
 
 First, run the development server:
 
