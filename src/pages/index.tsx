@@ -27,7 +27,7 @@ export default function Home({product}:HomeProps) {
                     <h1>Notícias sobre o <span>React</span> no mundo.</h1>
                     <p>
                         Tenha acesso a todas as publicações <br />
-                        <span className={styles.span_preso}>por {product.amount} mês</span>
+                        <span className={styles.span_preso}>por $ {product.amount} mês</span>
                     </p>
                     <SubscribeButton />
                 </section>
