@@ -1,10 +1,10 @@
 import styles from './styles.module.scss'
 import { FaGithub } from 'react-icons/fa'
 import { FiX } from 'react-icons/fi'
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export function SignInButton() {
-    const [session] = useSession();
+    const { data: session } = useSession()
     return session ? (
         <button
             type="button"
