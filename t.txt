@@ -1,0 +1,16 @@
+q.If(
+            q.Not(
+              q.Exists(
+                q.Match(
+                  q.Index('user_by_ameil'),
+                  q.Casefold(email)
+                )
+              )
+            ),
+          )
+
+
+           q.Create(
+            q.Collection('users'),
+            { data: { email } }
+          )
