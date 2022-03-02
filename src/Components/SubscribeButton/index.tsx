@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn } from "next-auth/react"
 import { api } from '../../server/api';
 import { getStripeJs } from '../../server/stripe-js';
 interface buttonSubcribe{
