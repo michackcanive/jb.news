@@ -7,13 +7,13 @@ import { stripe } from '../server/stripe';
 interface HomeProps {
     product: {
         priceId: String,
-        amount: number
+        amanut: number
     }
 
 }
 
 export default function Home({ product }: HomeProps) {
-    console.log(product)
+ 
     return (
         <>
             <Head>
@@ -41,7 +41,7 @@ export default function Home({ product }: HomeProps) {
 export const getStaticProps: GetStaticProps = async () => {
 
     const price = await stripe.prices.retrieve('price_1KVXUzJ8YRWSg66JKX7mvOv2')
-    console.log(price)
+   
     const product = {
         priceId: price.id,
         amanut: new Intl.NumberFormat('en-US', {
