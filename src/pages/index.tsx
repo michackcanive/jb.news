@@ -1,18 +1,18 @@
 import Head from 'next/head';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import { SubscribeButton } from '../Components/SubscribeButton';
 import styles from './home.module.scss';
 import { stripe } from '../server/stripe';
 
-interface HomeProps{
-    product:{
-    priceId:String,
-    amount:number
+interface HomeProps {
+    product: {
+        priceId: String,
+        amount: number
     }
-    
+
 }
 
-export default function Home({product}:HomeProps) {
+export default function Home({ product }: HomeProps) {
 
     return (
         <>
@@ -27,9 +27,9 @@ export default function Home({product}:HomeProps) {
                     <h1>Notícias sobre o <span>React</span> no mundo.</h1>
                     <p>
                         Tenha acesso a todas as publicações <br />
-                        <span className={styles.span_preso}>por $ {product.amount} mês</span>
+                        <span className={styles.span_preso}>por {product.amount} mês</span>
                     </p>
-                    <SubscribeButton />
+                    <SubscribeButton priceId={product.priceId} />
                 </section>
                 <img src='/images/avatar.png' alt='jb.news' />
             </main>
@@ -38,19 +38,22 @@ export default function Home({product}:HomeProps) {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 
-        const price= await stripe.prices.retrieve('price_1KVXUzJ8YRWSg66JKX7mvOv2',{
-            expand:['product']
-        });
-        const product={
-            priceId:price.id,
-            amanut:(price.unit_amount/100)
-        }
-        
-    return {
-    props:{
-        product,
+    const price = await stripe.prices.retrieve('price_1KVXUzJ8YRWSg66JKX7mvOv2')
+
+    const product = {
+        priceId: price.id,
+        amanut: new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        }).format(price.unit_amount / 100)
     }
-}
+
+    return {
+        props: {
+            product,
+        },
+        revalidate:60*60*24// 24h para revalidar a pagina
+    }
 }
