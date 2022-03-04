@@ -3,12 +3,11 @@ import { getSession } from "next-auth/react"
 import { stripe } from "../../server/stripe";
 
 export default async (resquest: NextRequest, response: NextResponse) => {
-    const session = await getSession({})
+    const session = await getSession({ resquest })
 
     const stripeCustomer = await stripe.customers.create({
         email: 'mechackteste@gmail.com',
-        name:'teste'
-       
+        name: 'teste'
     })
 
     if (resquest.method === 'POST') {
