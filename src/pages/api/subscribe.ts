@@ -31,6 +31,7 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
     if(!customerId) {
       const stripeCustomer = await stripe.customers.create({
         email: session.user.email,
+        
       });
   
       await fauna.query(
@@ -47,19 +48,19 @@ export default async (request: NextApiRequest, response: NextApiResponse) => {
       customerId = stripeCustomer.id;
     }
 
-
-
     const stripeCheckoutSession = await stripe.checkout.sessions.create({
       customer: customerId,
       payment_method_types: ['card'],
       billing_address_collection: 'required',
       line_items: [
         {price: 'price_1IYJ7WCrN0slKqO6rQQZVvOz', quantity: 1}
+        
       ],
       mode: 'subscription',
       allow_promotion_codes: true,
-      success_url: process.env.STRIPE_SUCCESS_URL,
+      success_url: process.env.STRIPE_SUCESS_URL,
       cancel_url: process.env.STRIPE_CANCEL_URL,
+   
     });
 
     return response.status(200).json({ sessionId: stripeCheckoutSession.id });
